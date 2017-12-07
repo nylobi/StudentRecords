@@ -9,7 +9,7 @@ namespace StudentObjects
 {
     class Program
     {
-        static List<string> records = new List<string>();
+        static List<Student> records = new List<Student>();
 
         static void Main(string[] args)
         {
@@ -41,9 +41,6 @@ namespace StudentObjects
                     case '4':
                         ListAllRecords();
                         break;
-                    case '5':
-                        SearchBySNumber();
-                        break;
                     case '9':
                         keepGoing = false;
                         break;
@@ -52,13 +49,7 @@ namespace StudentObjects
                         break;
                 }
             }
-        
-        Student s1 = new Student(668,"John","Smith",new DateTime(2000,01,12));
-            s1.Grade = 'b';
-
-            Console.WriteLine(s1.FirstName);
-            Console.WriteLine(s1.DateOfBirth);
-            Console.ReadKey();
+       
         }
         static void ReadInFile()
         {
@@ -112,7 +103,17 @@ namespace StudentObjects
                 int i = 0;
                 while (!reader.EndOfStream)
                 {
-                    records.Add(reader.ReadLine());
+                    var record = reader.ReadLine();
+                    var elements = record.Split(',');
+
+                    int Number = Convert.ToInt32(elements[0]);
+                    string FirstName = Convert.ToString(elements[1]);
+                    string LastName = Convert.ToString(elements[2]);
+                    DateTime DateOfBirth = Convert.ToDateTime(elements[3]);
+                    char Grade = Convert.ToChar(elements[4]);
+
+                    Student s = new Student(Number, FirstName, LastName, DateOfBirth, Grade);
+
                     i++;
                 }
             }
@@ -130,21 +131,6 @@ namespace StudentObjects
             foreach (var record in records)
             {
                 WriteRecordToConsole(record);
-            }
-        }
-
-        static void SearchBySNumber()
-        {
-            Console.WriteLine("Enter Student Number for the student you want to find");
-            string number = Console.ReadLine();
-            var record = records.Where(s => s.Split(',')[0] == number).FirstOrDefault();
-            if (records.Contains(record))
-            {
-                WriteRecordToConsole(record);
-            }
-            else
-            {
-                Console.WriteLine("There isn't a Student with that number");
             }
         }
     }

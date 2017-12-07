@@ -9,12 +9,13 @@ namespace StudentObjects
     public class Student
     {
 
-        public Student(int number, string first, string last, DateTime dob)
+        public Student(int number, string first, string last, DateTime dob, char gd)
         {
             Number = number;
             FirstName = first;
             LastName = last;
             DateOfBirth = dob;
+            Grade = gd;
         }
 
         public int Number { get; private set; }
