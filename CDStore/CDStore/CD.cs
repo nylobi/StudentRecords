@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CDStore
 {
-    class CD
+    public class CD
     {
         public int CDid { get; set; }
 
@@ -16,6 +16,11 @@ namespace CDStore
 
         public DateTime Published { get; set; }
 
-        public string[] song { get; set; }
+        public virtual List<Song> Songs { get; set; }
+
+        public CD()
+        {
+            Songs = new List<Song>();
+        }
     }
 }

@@ -14,7 +14,10 @@ namespace CDStore
 
         public virtual string MusicType { get; set; }
 
-        public virtual List<Song> Songs { get; set; }​
+        public virtual List<Song> Songs { get; set; }
+
+        public virtual List<CD> CDs { get; set; }
+
     }
 }
 

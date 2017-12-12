@@ -11,7 +11,7 @@ namespace CDStore
             bool keepGoing = true;
             while (keepGoing)
             {
-                Console.Write("\n\nEnter 1 to add an Artist \n2 to List Artists \n3 Find artist\n9 to Quit : ");
+                Console.Write("\n\nEnter 1 to add an Artist \n2 to List Artists \n3 Find artist \n4 Search for CD by title \n9 to Quit : ");
                 char key = Console.ReadLine()[0];
                 switch (key)
                 {
@@ -23,6 +23,9 @@ namespace CDStore
                         break;
                     case '3':
                         FindArtist(context);
+                        break;
+                    case '4':
+                        SearchForCD(context);
                         break;
                     case '9':
                         keepGoing = false;
@@ -44,7 +47,7 @@ namespace CDStore
             foreach (Artist a in context.Artists)
             {
                 Console.WriteLine(a.Name + " " + a.ArtistId);
-                foreach (Song s in a.Songs)​
+                foreach (Song s in a.Songs)
                 {
                     Console.WriteLine(s.Title + "\t" + s.MusicType);
                 }
@@ -60,6 +63,15 @@ namespace CDStore
             Console.WriteLine("Saving ...");
             context.Artists.Add(a);
             context.SaveChanges();
+        }
+
+        private static void SearchForCD(CDStoreDbContext context)
+        {
+            Console.Write("Enter Title of the CD: ");
+            string title = Console.ReadLine();
+            var CDtitle = context.CDs.FirstOrDefault(a => a.Title.Contains(title));
+            Console.WriteLine("CD Title: " + CDtitle.Title);
+
         }
     }
 }
